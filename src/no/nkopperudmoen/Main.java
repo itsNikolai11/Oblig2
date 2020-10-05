@@ -3,8 +3,10 @@ package no.nkopperudmoen;
 public class Main {
 
     public static void main(String[] args) {
-        // write your code here
+        Liste<String> liste = new DobbeltLenketListe<>();
+        System.out.println(liste.antall() + " " + liste.tom());
     }
+
 
     /**
      * Oppgave 1
