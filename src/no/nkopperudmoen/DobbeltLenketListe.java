@@ -52,32 +52,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new NullPointerException("Tabellen a er null!");
         }
         if (a.length == 0) {
-            this.hode = null;
+            hode = null;
         }
 
-        Node<T> current;
+        Node<T> current = null;
         Node<T> prev = null;
         for (int i = 0; i < a.length; i++) {
-            if (a[i] == null) {
+            if (a[i] != null) {
+                if (this.hode == null) {
+                    hode = new Node<>(a[i], null, null);
+                    if (i == a.length - 1) {
+                        hale = hode;
+                        break;
+                    }
+                    prev = hode;
+                    antall++;
 
-            } else if (this.hode == null) {
-                this.hode = new Node<>(a[i], null, null);
-                prev = this.hode;
-                antall++;
-            } else {
-                current = new Node<>(a[i], prev, null);
-                prev.neste = current;
-                prev = current;
-                if (i == a.length - 1) {
-                    this.hale = current;
+                } else {
+                    current = new Node<>(a[i], prev, null);
+                    prev.neste = current;
+                    prev = current;
+                    antall++;
                 }
-                antall++;
-
-
             }
-
-
         }
+        if (current != null) {
+            hale = current;
+        }
+
     }
 
     public Liste<T> subliste(int fra, int til) {
@@ -99,9 +101,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (verdi == null) {
             throw new NullPointerException("Kan ikke legge til null-verdier!");
         }
+        Node<T> newNode = new Node<>(verdi, null, null);
         if (tom()) {
-            this.hode = new Node<>(verdi);
+            hode = newNode;
         }
+        Node<T> last = hode;
+        while (last.neste != null) {
+            last = last.neste;
+        }
+        last.neste = newNode;
+        newNode.forrige = last;
         antall++;
         endringer++;
         return true;
@@ -109,7 +118,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+        //TODO Loop igjennom til indeksen er funnet.
+        //TODO sett noden før sin .next til den nye noden. Sett noden som kommer etter sin previous til den nye noden.
+        int i = 0;
+        Node<T> temp = hode;
+        while (i < indeks) {
+            temp = temp.neste;
+            i++;
+        }
+        Node<T> newNode = new Node<>(verdi, temp, temp.neste);
+        temp.neste.forrige = newNode;
+        temp.neste = newNode;
     }
 
     @Override
@@ -154,16 +173,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         StringBuilder s = new StringBuilder();
         s.append("[");
-        Node<T> current = hode;
-        for (int i = 0; i <= antall; i++) {
-            s.append(current.verdi);
-            if (current.neste == null) {
-                s.append("]");
-                break;
-            }
-            s.append(", ");
-            current = current.neste;
+        Node<T> siste = hode;
+        while (siste.neste != null) {
+            s.append(siste.verdi).append(", ");
+            siste = siste.neste;
         }
+        s.append(siste.verdi);
+        s.append("]");
+
         return s.toString();
     }
 
@@ -173,16 +190,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         StringBuilder s = new StringBuilder();
         s.append("[");
-        Node<T> current = hale;
-        for (int i = 0; i <= antall; i++) {
-            s.append(current);
-            if (current.forrige == null) {
-                s.append("]");
-                break;
-            }
-            s.append(", ");
-            current = current.forrige;
+        Node<T> siste = hale;
+        while (siste.forrige != null) {
+            s.append(siste.verdi).append(", ");
+            siste = siste.forrige;
         }
+        s.append(siste.verdi);
+
+        //TODO fucker opp når linkedlist kun har en verdi. Sjekker hale, som ikke har noen verdi, først.
+        s.append("]");
         return s.toString();
     }
 
