@@ -53,23 +53,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         if (a.length == 0) {
             this.hode = null;
-            antall = 0;
         }
 
         Node<T> current;
         Node<T> prev = null;
-        for (T t : a) {
-            if (t == null) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == null) {
 
             } else if (this.hode == null) {
-                this.hode = new Node<>(t, null, null);
-                prev = hode;
+                this.hode = new Node<>(a[i], null, null);
+                prev = this.hode;
                 antall++;
             } else {
-                current = new Node<>(t, prev, null);
+                current = new Node<>(a[i], prev, null);
                 prev.neste = current;
                 prev = current;
+                if (i == a.length - 1) {
+                    this.hale = current;
+                }
                 antall++;
+
+
             }
 
 
@@ -92,8 +96,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-
+        if (verdi == null) {
+            throw new NullPointerException("Kan ikke legge til null-verdier!");
+        }
+        if (tom()) {
+            this.hode = new Node<>(verdi);
+        }
         antall++;
+        endringer++;
         return true;
     }
 
@@ -139,11 +149,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        if (tom()) {
+            return "[]";
+        }
+        StringBuilder s = new StringBuilder();
+        s.append("[");
+        Node<T> current = hode;
+        for (int i = 0; i <= antall; i++) {
+            s.append(current.verdi);
+            if (current.neste == null) {
+                s.append("]");
+                break;
+            }
+            s.append(", ");
+            current = current.neste;
+        }
+        return s.toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        if (tom()) {
+            return "[]";
+        }
+        StringBuilder s = new StringBuilder();
+        s.append("[");
+        Node<T> current = hale;
+        for (int i = 0; i <= antall; i++) {
+            s.append(current);
+            if (current.forrige == null) {
+                s.append("]");
+                break;
+            }
+            s.append(", ");
+            current = current.forrige;
+        }
+        return s.toString();
     }
 
     @Override
