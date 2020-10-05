@@ -55,8 +55,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             this.hode = null;
             antall = 0;
         }
-        this.hode = new Node<>(a[0], null, new Node<>(a[1]));
 
+        Node<T> current;
+        Node<T> prev = null;
+        for (T t : a) {
+            if (t == null) {
+
+            } else if (this.hode == null) {
+                this.hode = new Node<>(t, null, null);
+                prev = hode;
+                antall++;
+            } else {
+                current = new Node<>(t, prev, null);
+                prev.neste = current;
+                prev = current;
+                antall++;
+            }
+
+
+        }
     }
 
     public Liste<T> subliste(int fra, int til) {
