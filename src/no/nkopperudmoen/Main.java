@@ -13,6 +13,8 @@ public class Main {
         System.out.println(l1.toString());
         System.out.println(l2.toString());
         System.out.println(l3.toString());
+        l3.leggInn("11");
+
         System.out.println(l1.omvendtString());
         System.out.println(l2.omvendtString());
         System.out.println(l3.omvendtString());

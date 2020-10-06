@@ -63,6 +63,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     hode = new Node<>(a[i], null, null);
                     if (i == a.length - 1) {
                         hale = hode;
+                        antall++;
                         break;
                     }
                     prev = hode;
@@ -104,6 +105,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> newNode = new Node<>(verdi, null, null);
         if (tom()) {
             hode = newNode;
+            hale = newNode;
+            antall++;
+            endringer++;
+            return true;
         }
         Node<T> last = hode;
         while (last.neste != null) {
@@ -111,6 +116,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         last.neste = newNode;
         newNode.forrige = last;
+        hale = newNode;
         antall++;
         endringer++;
         return true;
@@ -123,7 +129,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         int i = 0;
         Node<T> temp = hode;
         while (i < indeks) {
-            temp = temp.neste;
+            if (temp.neste != null) {
+                temp = temp.neste;
+            }
             i++;
         }
         Node<T> newNode = new Node<>(verdi, temp, temp.neste);
@@ -196,8 +204,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             siste = siste.forrige;
         }
         s.append(siste.verdi);
-
-        //TODO fucker opp når linkedlist kun har en verdi. Sjekker hale, som ikke har noen verdi, først.
         s.append("]");
         return s.toString();
     }
