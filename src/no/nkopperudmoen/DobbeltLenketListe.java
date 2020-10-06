@@ -155,9 +155,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new NullPointerException("Verdi kan ikke være null!");
         }
         if (tom()) {
-            hode = new Node<>(verdi, null, null);
-            hale = new Node<>(verdi, null, null);
+            hode = new Node<>(verdi, null, hale);
+            hale = new Node<>(verdi, hode, null);
             antall++;
+            endringer++;
             return;
         }
         int i = 0;
@@ -166,16 +167,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             if (temp.neste != null) {
                 temp = temp.neste;
             }
-
             i++;
         }
 
-        Node<T> newNode = new Node<>(verdi, temp, temp.neste);
+        Node<T> newNode = new Node<>(verdi, temp.forrige, temp);
         if (i == 0) {
+            if (antall > 2) {
+                hode.neste.forrige = newNode;
+            }
             hode = newNode;
             hode.neste = temp;
+            temp.forrige = hode;
             hode.forrige = null;
             antall++;
+            endringer++;
             return;
         }
         if (i == antall) {
@@ -184,11 +189,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hale.forrige = temp;
             temp.neste = hale;
             antall++;
+            endringer++;
             return;
         }
-        temp.neste.forrige = newNode;
-        temp.neste = newNode;
+        temp.forrige.neste = newNode;
+        temp.forrige = newNode;
         antall++;
+        endringer++;
     }
 
 
