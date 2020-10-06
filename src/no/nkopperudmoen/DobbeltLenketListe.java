@@ -125,6 +125,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (verdi == null) {
             throw new NullPointerException("Kan ikke legge til null-verdier!");
         }
+
         Node<T> newNode = new Node<>(verdi, null, null);
         if (tom()) {
             hode = newNode;
@@ -147,8 +148,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        //TODO Loop igjennom til indeksen er funnet.
-        //TODO sett noden før sin .next til den nye noden. Sett noden som kommer etter sin previous til den nye noden.
+        if (indeks < 0 || indeks > antall) {
+            throw new IndexOutOfBoundsException("Index:" + indeks + " Liste length: " + antall);
+        }
+        if (verdi == null) {
+            throw new NullPointerException("Verdi kan ikke være null!");
+        }
         int i = 0;
         Node<T> temp = hode;
         while (i < indeks) {
@@ -158,7 +163,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
             i++;
         }
+
         Node<T> newNode = new Node<>(verdi, temp, temp.neste);
+        if (i == 0) {
+            hode = newNode;
+            hode.neste = temp;
+            hode.forrige = null;
+            return;
+        }
+        if (i == antall) {
+            hale = newNode;
+            hale.neste = null;
+            hale.forrige = temp;
+            temp.neste = hale;
+        }
         temp.neste.forrige = newNode;
         temp.neste = newNode;
     }
