@@ -149,13 +149,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return finnNode(indeks).verdi;
     }
 
-    private Node<T> finnNode(int indeks) {
+    private Node<T> finnNode(int indeks) throws IndexOutOfBoundsException {
+        indeksKontroll(indeks, false);
         if (tom()) {
             throw new IndexOutOfBoundsException("");
         }
         Node<T> siste;
         if (indeks >= antall) {
-            //TODO indeksen er større enn listen!!
+            throw new IndexOutOfBoundsException("");
         }
         if (indeks < antall / 2) {
             siste = hode;
@@ -169,7 +170,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             siste = hale;
             int i = antall - 1;
             while (i > indeks) {
-                siste = siste.neste;
+                siste = siste.forrige;
                 i--;
             }
             //TODO let fra hale og bakover
@@ -186,7 +187,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        if(nyverdi == null){
+            throw new NullPointerException("Verdien kan ikke være null!");
+        }
+        indeksKontroll(indeks, true);
+        Node<T> oppdatert = finnNode(indeks);
+        T gammelVerdi = oppdatert.verdi;
+        oppdatert.verdi = nyverdi;
+
+        endringer++;
+        return gammelVerdi;
+
     }
 
     @Override
