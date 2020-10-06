@@ -100,10 +100,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     private void fraTilKontroll(int fra, int til) {
-        if (this.antall < til || fra < 0 ) {
+        if (this.antall < til || fra < 0) {
             throw new IndexOutOfBoundsException("");
         }
-        if(til - fra < 0){
+        if (til - fra < 0) {
             throw new IllegalArgumentException("");
         }
 
@@ -205,7 +205,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+        if (verdi == null || tom()) {
+            return -1;
+        }
+        Node<T> current = hode;
+        int indeks = 0;
+        while (!current.verdi.equals(verdi)) {
+            current = current.neste;
+            indeks++;
+            if(indeks == antall){
+                return -1;
+            }
+        }
+        return indeks;
     }
 
     @Override
