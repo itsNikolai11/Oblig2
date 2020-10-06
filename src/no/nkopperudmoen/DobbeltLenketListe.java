@@ -84,7 +84,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+        //TODO oppgave 3b
+        fraTilKontroll(fra, til);
+        DobbeltLenketListe<T> sublist = new DobbeltLenketListe<>();
+        if (tom()) {
+            return sublist;
+        }
+        Node<T> current = finnNode(fra);
+        int i = fra;
+        while (i < til) {
+            sublist.leggInn(current.verdi);
+            current = current.neste;
+            i++;
+        }
+        return sublist;
+    }
+
+    private void fraTilKontroll(int fra, int til) {
+        if (this.antall < til || fra < 0) {
+            throw new IndexOutOfBoundsException("");
+        }
+
     }
 
     @Override
@@ -132,12 +152,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             if (temp.neste != null) {
                 temp = temp.neste;
             }
+
             i++;
         }
         Node<T> newNode = new Node<>(verdi, temp, temp.neste);
         temp.neste.forrige = newNode;
         temp.neste = newNode;
     }
+
 
     @Override
     public boolean inneholder(T verdi) {
@@ -165,7 +187,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 siste = siste.neste;
                 i++;
             }
-            //TODO let fra hodet og fremover
         } else {
             siste = hale;
             int i = antall - 1;
@@ -173,7 +194,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 siste = siste.forrige;
                 i--;
             }
-            //TODO let fra hale og bakover
         }
 
 
@@ -187,7 +207,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        if(nyverdi == null){
+        if (nyverdi == null) {
             throw new NullPointerException("Verdien kan ikke være null!");
         }
         indeksKontroll(indeks, true);

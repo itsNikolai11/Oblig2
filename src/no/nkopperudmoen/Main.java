@@ -13,11 +13,18 @@ public class Main {
         System.out.println(l1.toString());
         System.out.println(l2.toString());
         System.out.println(l3.toString());
-        l3.leggInn("11");
+        l3.leggInn("C");
+        System.out.println(l3.toString());
 
         System.out.println(l1.omvendtString());
         System.out.println(l2.omvendtString());
         System.out.println(l3.omvendtString());
+        Character[] c = {'A','B','C','D','E','F','G','H','I','J',};
+        DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
+        System.out.println(liste.subliste(3,8)); // [D, E, F, G, H]
+        System.out.println(liste.subliste(5,5)); // []
+        System.out.println(liste.subliste(8,liste.antall())); // [I, J]
+
 
     }
 
