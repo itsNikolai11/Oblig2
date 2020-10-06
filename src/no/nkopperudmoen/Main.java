@@ -19,14 +19,33 @@ public class Main {
         System.out.println(l1.omvendtString());
         System.out.println(l2.omvendtString());
         System.out.println(l3.omvendtString());
-        Character[] c = {'A','B','C','D','E','F','G','H','I','J',};
-        DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
-        System.out.println(liste.indeksTil('A'));
+        Character[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
+        liste.leggInn(0, 4);  // ny verdi i tom liste
+        System.out.println(liste.toString());
+        liste.leggInn(0, 2);  // ny verdi legges forrest
+        System.out.println(liste.toString());
+        liste.leggInn(2, 6);  // ny verdi legges bakerst
+        System.out.println(liste.toString());
+        liste.leggInn(1, 3);  // ny verdi nest forrest
+        System.out.println(liste.toString());
+        liste.leggInn(3, 5);  // ny verdi nest bakerst
+        System.out.println(liste.toString());
+        liste.leggInn(0, 1);  // ny verdi forrest
+        System.out.println(liste.toString());
+        liste.leggInn(6, 7);  // ny verdi legges bakerst
+        DobbeltLenketListe<Integer> tom = new DobbeltLenketListe<>();
+      /*  System.out.println(liste.indeksTil('A'));
         System.out.println(liste.indeksTil('C'));
         System.out.println(liste.indeksTil('K'));
         System.out.println(liste.inneholder('A'));
         System.out.println(liste.inneholder('G'));
         System.out.println(liste.inneholder('K'));
+        liste.leggInn(0, 'N');
+        liste.leggInn(3,'L');
+        liste.leggInn(liste.antall(), 'K');
+        System.out.println(liste.toString());
+*/
 
 
 /*
