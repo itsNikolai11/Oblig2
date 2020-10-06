@@ -172,9 +172,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         Node<T> newNode = new Node<>(verdi, temp.forrige, temp);
         if (i == 0) {
-            if (antall > 2) {
-                hode.neste.forrige = newNode;
-            }
+            
             hode = newNode;
             hode.neste = temp;
             temp.forrige = hode;
