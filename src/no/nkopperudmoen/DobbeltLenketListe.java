@@ -146,7 +146,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        return finnNode(indeks).verdi;
+    }
+
+    private Node<T> finnNode(int indeks) {
+        if (tom()) {
+            throw new IndexOutOfBoundsException("");
+        }
+        Node<T> siste;
+        if (indeks >= antall) {
+            //TODO indeksen er større enn listen!!
+        }
+        if (indeks < antall / 2) {
+            siste = hode;
+            int i = 0;
+            while (i < indeks) {
+                siste = siste.neste;
+                i++;
+            }
+            //TODO let fra hodet og fremover
+        } else {
+            siste = hale;
+            int i = antall - 1;
+            while (i > indeks) {
+                siste = siste.neste;
+                i--;
+            }
+            //TODO let fra hale og bakover
+        }
+
+
+        return siste;
     }
 
     @Override
