@@ -84,7 +84,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
-        //TODO oppgave 3b
         fraTilKontroll(fra, til);
         DobbeltLenketListe<T> sublist = new DobbeltLenketListe<>();
         if (tom()) {
@@ -101,9 +100,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     private void fraTilKontroll(int fra, int til) {
-        if (this.antall < til || fra < 0) {
+        if (this.antall < til || fra < 0 ) {
             throw new IndexOutOfBoundsException("");
         }
+        if(til - fra < 0){
+            throw new IllegalArgumentException("");
+        }
+
 
     }
 
