@@ -27,13 +27,15 @@ public class Main {
         System.out.println(liste.toString());
         liste.leggInn(2, 6);  // ny verdi legges bakerst
         System.out.println(liste.toString());
-        liste.leggInn(1, 3);  // ny verdi nest forrest
+        liste.leggInn(1, 3);  // ny verdi nest forrest //TODO forrige-verdien her blir feil
         System.out.println(liste.toString());
         liste.leggInn(3, 5);  // ny verdi nest bakerst
         System.out.println(liste.toString());
         liste.leggInn(0, 1);  // ny verdi forrest
         System.out.println(liste.toString());
         liste.leggInn(6, 7);  // ny verdi legges bakerst
+        System.out.println(liste.toString());
+        System.out.println(liste.omvendtString());
         DobbeltLenketListe<Integer> tom = new DobbeltLenketListe<>();
       /*  System.out.println(liste.indeksTil('A'));
         System.out.println(liste.indeksTil('C'));
