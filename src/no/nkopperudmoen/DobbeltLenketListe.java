@@ -166,7 +166,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        return indeksTil(verdi) != -1;
     }
 
     @Override
@@ -213,7 +213,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         while (!current.verdi.equals(verdi)) {
             current = current.neste;
             indeks++;
-            if(indeks == antall){
+            if (indeks == antall) {
                 return -1;
             }
         }

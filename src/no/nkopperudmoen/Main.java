@@ -21,9 +21,18 @@ public class Main {
         System.out.println(l3.omvendtString());
         Character[] c = {'A','B','C','D','E','F','G','H','I','J',};
         DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
+        System.out.println(liste.indeksTil('A'));
+        System.out.println(liste.indeksTil('C'));
+        System.out.println(liste.indeksTil('K'));
+        System.out.println(liste.inneholder('A'));
+        System.out.println(liste.inneholder('G'));
+        System.out.println(liste.inneholder('K'));
+
+
+/*
         System.out.println(liste.subliste(3,8)); // [D, E, F, G, H]
         System.out.println(liste.subliste(5,5)); // []
-        System.out.println(liste.subliste(8,liste.antall())); // [I, J]
+        System.out.println(liste.subliste(8,liste.antall())); // [I, J]*/
 
 
     }
