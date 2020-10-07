@@ -190,7 +190,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer++;
     }
 
-
     @Override
     public boolean inneholder(T verdi) {
         return indeksTil(verdi) != -1;
@@ -270,39 +269,68 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (tom()) {
             return false;
         }
-        Node<T> temp = hode;
-        while (!temp.verdi.equals(verdi)) {
-            if (temp.neste == null) {
+        Node<T> curr = hode;
+        while (!curr.verdi.equals(verdi)) {
+            if (curr.neste == null) {
                 return false;
             }
-            temp = temp.neste;
+            curr = curr.neste;
         }
-        if (temp.neste == null && temp.forrige == null) {
+        if (curr.neste == null) {
+            if (curr.forrige == null) {
+                hode = null;
+                hale = null;
+                endringer++;
+                antall--;
+                return true;
+            }
+            curr.forrige.neste = null;
+            hale = curr.forrige;
+            endringer++;
+            antall--;
+            return true;
+        }
+        if (curr.forrige == null) {
+            curr.neste.forrige = null;
+            hode = curr.neste;
+            endringer++;
+            antall--;
+            return true;
+        }
+        curr.neste.forrige = curr.forrige;
+        curr.forrige.neste = curr.neste;
+        endringer++;
+        antall--;
+        return true;
+
+        //as
+/*
+        if (curr.neste == null && curr.forrige == null) {
             hode = null;
             hale = null;
             endringer++;
             antall--;
             return true;
         }
-        if (temp.neste == null) {
-            temp.forrige.neste = null;
-            hale = temp.forrige;
+        if (curr.neste == null) {
+            curr.forrige.neste = null;
+            hale = curr.forrige;
             endringer++;
             antall--;
             return true;
         }
-        if (temp.forrige == null) {
-            temp.neste.forrige = null;
-            hode = temp.neste;
+        if (curr.forrige == null) {
+            curr.neste.forrige = null;
+            hode = curr.neste;
             endringer++;
             antall--;
             return true;
         }
-        temp.forrige.neste = temp.neste;
-        temp.neste.forrige = temp.forrige;
+        curr.forrige.neste = curr.neste;
+        curr.neste.forrige = curr.forrige;
         antall--;
         endringer++;
-        return true;
+        return true;*/
     }
 
     @Override
@@ -311,55 +339,55 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (tom()) {
             return null;
         }
-        Node<T> temp = hode;
+        Node<T> curr = hode;
         int i = 0;
 
         if (indeks > antall / 2) {
             i = antall - 1;
-            temp = hale;
+            curr = hale;
             while (i > indeks) {
-                if (temp.forrige != null) {
-                    temp = temp.forrige;
+                if (curr.forrige != null) {
+                    curr = curr.forrige;
                 }
                 i--;
             }
         } else {
             while (i < indeks) {
-                if (temp.neste != null) {
-                    temp = temp.neste;
+                if (curr.neste != null) {
+                    curr = curr.neste;
                 }
                 i++;
             }
         }
 
-        if (temp.forrige == null) {
+        if (curr.forrige == null) {
             //Hode
-            if (temp.neste == null) {
+            if (curr.neste == null) {
                 hode = null;
                 hale = null;
                 endringer++;
                 antall--;
-                return temp.verdi;
+                return curr.verdi;
             }
-            hode = temp.neste;
-            temp.neste.forrige = null;
+            hode = curr.neste;
+            curr.neste.forrige = null;
             endringer++;
             antall--;
-            return temp.verdi;
+            return curr.verdi;
         }
-        if (temp.neste == null) {
+        if (curr.neste == null) {
             //Hale
-            temp.forrige.neste = null;
-            hale = temp.forrige;
+            curr.forrige.neste = null;
+            hale = curr.forrige;
             endringer++;
             antall--;
-            return temp.verdi;
+            return curr.verdi;
         }
-        temp.forrige.neste = temp.neste;
-        temp.neste.forrige = temp.forrige;
+        curr.forrige.neste = curr.neste;
+        curr.neste.forrige = curr.forrige;
         endringer++;
         antall--;
-        return temp.verdi;
+        return curr.verdi;
     }
 
 
