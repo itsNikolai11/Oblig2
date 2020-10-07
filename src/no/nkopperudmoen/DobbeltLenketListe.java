@@ -6,12 +6,8 @@ package no.nkopperudmoen;
 
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
-
 import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.Predicate;
+import java.util.NoSuchElementException;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
