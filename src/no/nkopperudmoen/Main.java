@@ -20,7 +20,7 @@ public class Main {
         System.out.println(l2.omvendtString());
         System.out.println(l3.omvendtString());
         Character[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',};
-        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
+       /* DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
         liste.leggInn(0, 4);  // ny verdi i tom liste
         System.out.println(liste.toString());
         liste.leggInn(0, 2);  // ny verdi legges forrest
@@ -34,6 +34,16 @@ public class Main {
         liste.leggInn(0, 1);  // ny verdi forrest
         System.out.println(liste.toString());
         liste.leggInn(6, 7);  // ny verdi legges bakerst
+        System.out.println(liste.toString());
+        System.out.println(liste.omvendtString());
+        liste.fjern(0);
+        System.out.println(liste.toString());
+        liste.fjern(1);
+        System.out.println(liste.toString());*/
+        DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(new String[]{"A", "B", "C", "D", "E", "F", "G"});
+        System.out.println(liste.fjern(3));
+        System.out.println(liste.fjern(0));
+        System.out.println(liste.fjern(4));
         System.out.println(liste.toString());
         System.out.println(liste.omvendtString());
         DobbeltLenketListe<Integer> tom = new DobbeltLenketListe<>();
