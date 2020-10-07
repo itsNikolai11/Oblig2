@@ -4,6 +4,7 @@ Nikolai Kopperudmoen, s344169
 
 ##**Oppgavebeskrivelse**
 Alle oppgavene består testene, og alle warnings er fjernet. 
+
 ####**Oppgave 1**
 For å sjekke om listen er tom, sjekker jeg om hode == null. 
 I konstruktøren sjekker jeg inn-tabbelen med en for-loop. Hvis verdien på på plass i i tabellen 

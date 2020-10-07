@@ -20,7 +20,7 @@ public class Main {
         System.out.println(l2.omvendtString());
         System.out.println(l3.omvendtString());
         Character[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',};
-       /* DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
+       DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
         liste.leggInn(0, 4);  // ny verdi i tom liste
         System.out.println(liste.toString());
         liste.leggInn(0, 2);  // ny verdi legges forrest
@@ -39,14 +39,9 @@ public class Main {
         liste.fjern(0);
         System.out.println(liste.toString());
         liste.fjern(1);
-        System.out.println(liste.toString());*/
+        System.out.println(liste.toString());
 
-        DobbeltLenketListe<Integer> tom = new DobbeltLenketListe<>();
-        String[] navn = {"Lars","Anders","Bodil","Kari","Per","Berit"};
-        Liste<String> liste = new DobbeltLenketListe<>(navn);
-        liste.forEach(s -> System.out.print(s + " "));
-        System.out.println();
-        for (String s : liste) System.out.print(s + " ");
+
       /*  System.out.println(liste.indeksTil('A'));
         System.out.println(liste.indeksTil('C'));
         System.out.println(liste.indeksTil('K'));

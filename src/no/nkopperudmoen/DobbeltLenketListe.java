@@ -312,50 +312,56 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return null;
         }
         Node<T> temp = hode;
-        if (antall == 1) {
-            hale = null;
-            hode = null;
-            antall--;
-            endringer++;
-            return temp.verdi;
-        }
-        if (indeks == 0) {
-            temp.neste.forrige = null;
-            hode = temp.neste;
-            antall--;
-            endringer++;
-            return temp.verdi;
+        int i = 0;
 
-        }
-        if (indeks == antall) {
+        if (indeks > antall / 2) {
+            i = antall - 1;
             temp = hale;
+            while (i > indeks) {
+                if (temp.forrige != null) {
+                    temp = temp.forrige;
+                }
+                i--;
+            }
+        } else {
+            while (i < indeks) {
+                if (temp.neste != null) {
+                    temp = temp.neste;
+                }
+                i++;
+            }
+        }
+
+        if (temp.forrige == null) {
+            //Hode
+            if (temp.neste == null) {
+                hode = null;
+                hale = null;
+                endringer++;
+                antall--;
+                return temp.verdi;
+            }
+            hode = temp.neste;
+            temp.neste.forrige = null;
+            endringer++;
+            antall--;
+            return temp.verdi;
+        }
+        if (temp.neste == null) {
+            //Hale
             temp.forrige.neste = null;
             hale = temp.forrige;
-            antall--;
             endringer++;
+            antall--;
             return temp.verdi;
-        }
-        int i = 0;
-        while (i < indeks) {
-            if (temp.neste != null) {
-                temp = temp.neste;
-            }
-            i++;
-        }
-        if (temp.neste != null) {
-            temp.neste.forrige = temp.forrige;
-        } else if (temp.forrige == null) {
-            hode = null;
-            hale = null;
-            return temp.verdi;
-        } else {
-            hale = temp.forrige;
         }
         temp.forrige.neste = temp.neste;
-        antall--;
+        temp.neste.forrige = temp.forrige;
         endringer++;
+        antall--;
         return temp.verdi;
     }
+
 
     @Override
     public void nullstill() {
