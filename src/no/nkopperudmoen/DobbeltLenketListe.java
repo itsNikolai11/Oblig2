@@ -149,11 +149,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new NullPointerException("Verdi kan ikke være null!");
         }
         if (tom()) {
+            if (indeks != 0) {
+                throw new IndexOutOfBoundsException("Index " + indeks + " er ugyldig for listen med lengde " + antall);
+            }
             hode = new Node<>(verdi, null, hale);
             hale = new Node<>(verdi, hode, null);
             antall++;
             endringer++;
             return;
+
         }
         int i = 0;
         Node<T> temp = hode;

@@ -916,6 +916,7 @@ class DobbeltLenketListeTest {
         for (int i = 40000; i <= 50000; i++) nyliste.fjern(i);
         tid2 = System.currentTimeMillis() - tid2;
 
+
         long maks = Math.max(tid1, tid2);
         long min = Math.min(tid1, tid2);
 
