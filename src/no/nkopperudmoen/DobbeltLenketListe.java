@@ -268,7 +268,45 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+        if (verdi == null) {
+            return false;
+        }
+        if (tom()) {
+            return false;
+        }
+        Node<T> temp = hode;
+        while (!temp.verdi.equals(verdi)) {
+            if (temp.neste == null) {
+                return false;
+            }
+            temp = temp.neste;
+        }
+        if (temp.neste == null && temp.forrige == null) {
+            hode = null;
+            hale = null;
+            endringer++;
+            antall--;
+            return true;
+        }
+        if (temp.neste == null) {
+            temp.forrige.neste = null;
+            hale = temp.forrige;
+            endringer++;
+            antall--;
+            return true;
+        }
+        if (temp.forrige == null) {
+            temp.neste.forrige = null;
+            hode = temp.neste;
+            endringer++;
+            antall--;
+            return true;
+        }
+        temp.forrige.neste = temp.neste;
+        temp.neste.forrige = temp.forrige;
+        antall--;
+        endringer++;
+        return true;
     }
 
     @Override
@@ -278,6 +316,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return null;
         }
         Node<T> temp = hode;
+        if (antall == 1) {
+            hale = null;
+            hode = null;
+            antall--;
+            endringer++;
+            return temp.verdi;
+        }
         if (indeks == 0) {
             temp.neste.forrige = null;
             hode = temp.neste;
@@ -303,6 +348,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         if (temp.neste != null) {
             temp.neste.forrige = temp.forrige;
+        } else if (temp.forrige == null) {
+            hode = null;
+            hale = null;
+            return temp.verdi;
         } else {
             hale = temp.forrige;
         }
